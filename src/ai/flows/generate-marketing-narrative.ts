@@ -48,9 +48,10 @@ const prompt = ai.definePrompt({
 
   Product Description: {{{productDescription}}}
   Product Image: {{media url=productPhotoDataUri}}
-  \n  Ensure each piece of content is distinct and tailored to its respective purpose.
-  \n  Ensure that all content is less than 280 characters.
-  `, 
+
+  Ensure each piece of content is distinct and tailored to its respective purpose.
+  
+  Respond with a valid JSON object that adheres to the output schema.`,
 });
 
 const generateMarketingNarrativeFlow = ai.defineFlow(
