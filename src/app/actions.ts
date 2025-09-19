@@ -12,15 +12,20 @@ export async function generateStorefrontContent(
   settingDescription: string
 ): Promise<StorefrontData> {
   try {
-    const marketingNarrative = await generateMarketingNarrative({
+    const marketingNarrativePromise = generateMarketingNarrative({
       productDescription,
       productPhotoDataUri,
     });
 
-    const enhancedImage = await enhanceProductImage({
+    const enhancedImagePromise = enhanceProductImage({
       productPhotoDataUri,
       settingDescription,
     });
+
+    const [marketingNarrative, enhancedImage] = await Promise.all([
+      marketingNarrativePromise,
+      enhancedImagePromise,
+    ]);
 
     const engagementContent = `${marketingNarrative.productDescription} ${marketingNarrative.shortStory} ${marketingNarrative.socialMediaContent}`;
     const engagementInsights = await simulateContentEngagement({
